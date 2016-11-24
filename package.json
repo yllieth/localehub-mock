@@ -4,23 +4,24 @@
   "description": "Mock server for localehub project",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yllieth/localehub-mock.git"
   },
-  "keywords": [
-    "mock",
-    "stub",
-    "server",
-    "node",
-    "express"
-  ],
+  "keywords": [ "mock", "stub", "server", "node", "express" ],
   "author": "Sylvain RAGOT <sylvnimes@hotmail.com> (https://github.com/yllieth)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/yllieth/localehub-mock/issues"
   },
-  "homepage": "https://github.com/yllieth/localehub-mock#readme"
+  "homepage": "https://github.com/yllieth/localehub-mock#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "chalk": "^1.1.3",
+    "debug": "^2.3.3",
+    "express": "^4.14.0"
+  }
 }
