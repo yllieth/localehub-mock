@@ -6,13 +6,13 @@ var app = express();
 
 function setupCors(req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', process.env.STUBAPI_ORIGINS || 'http://localhost:8002');
+  res.setHeader('Access-Control-Allow-Origin', process.env.STUBAPI_ORIGINS || 'http://localhost:3000');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', process.env.STUBAPI_METHODS || 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', process.env.STUBAPI_HEADERS || 'x-from-state,content-type,authorization,cache-control,x-requested-with,x-mock-response,x-body-sent');
+  res.setHeader('Access-Control-Allow-Headers', process.env.STUBAPI_HEADERS || 'content-type,authorization,cache-control');
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
@@ -23,17 +23,18 @@ function setupCors(req, res, next) {
 }
 function formatConsoleoutput(req, res, next) {
   if (req.method !== 'OPTIONS') {
-    if      (req.method === 'GET')    { console.log('>    ' + chalk.green(req.method) + ' ' + req.originalUrl); }
-    else if (req.method === 'POST')   { console.log('>   ' + chalk.blue(req.method)   + ' ' + req.originalUrl); }
-    else if (req.method === 'PATCH')  { console.log('>  ' + chalk.magenta(req.method) + ' ' + req.originalUrl); }
-    else if (req.method === 'DELETE') { console.log('> ' + chalk.grey(req.method)     + ' ' + req.originalUrl); }
-    else                              { console.log('> ' + req.method + ' ' + req.originalUrl); }
+    if      (req.method === 'GET')    { console.log('mock>    ' + chalk.green(req.method) + ' ' + req.originalUrl); }
+    else if (req.method === 'POST')   { console.log('mock>   ' + chalk.blue(req.method)   + ' ' + req.originalUrl); }
+    else if (req.method === 'PATCH')  { console.log('mock>  ' + chalk.magenta(req.method) + ' ' + req.originalUrl); }
+    else if (req.method === 'DELETE') { console.log('mock> ' + chalk.grey(req.method)     + ' ' + req.originalUrl); }
+    else                              { console.log('mock> ' + req.method + ' ' + req.originalUrl); }
   }
 
   next();
 }
 function authentication(req, res, next) {
-  if (req.method !== 'OPTIONS' && req.headers.authorization === 'Bearer no-token-defined') {
+  var pattern = new RegExp(/[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}/);
+  if (req.method !== 'OPTIONS' && pattern.test(req.headers.authorization) !== true) {
     res.status(401).send({
       status: 401,
       message: "Invalid token"
