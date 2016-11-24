@@ -1,0 +1,16 @@
+# compiled output
+
+# dependencies
+/node_modules
+/bower_components
+
+# IDEs and editors
+.idea
+.project
+.classpath
+*.launch
+.settings/
+
+#System Files
+.DS_Store
+Thumbs.db
