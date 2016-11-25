@@ -5,6 +5,22 @@ var projects     = require('./src/projects');
 var translations = require('./src/translations');
 var app = express();
 
+function requestHasValidToken(request) {
+  var pattern = new RegExp(/[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}/);
+
+  if (request.hasOwnProperty('headers') === false || request.headers.hasOwnProperty('authorization') === false) {
+    return false;
+  }
+
+  return pattern.test(request.headers.authorization);
+}
+function isAuthenticatedRequest(request) {
+  return requestHasValidToken(request)
+    ? chalk.green.bold('✓')
+    : chalk.red.bold('✘');
+}
+
+// middlewares
 function setupCors(req, res, next) {
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', process.env.STUBAPI_ORIGINS || 'http://localhost:3000');
@@ -23,19 +39,20 @@ function setupCors(req, res, next) {
   next();
 }
 function formatConsoleoutput(req, res, next) {
+  var hasAuthorizationHeader = requestHasValidToken(req);
+
   if (req.method !== 'OPTIONS') {
-    if      (req.method === 'GET')    { console.log('mock>    ' + chalk.green(req.method) + ' ' + req.originalUrl); }
-    else if (req.method === 'POST')   { console.log('mock>   ' + chalk.blue(req.method)   + ' ' + req.originalUrl); }
-    else if (req.method === 'PATCH')  { console.log('mock>  ' + chalk.magenta(req.method) + ' ' + req.originalUrl); }
-    else if (req.method === 'DELETE') { console.log('mock> ' + chalk.grey(req.method)     + ' ' + req.originalUrl); }
-    else                              { console.log('mock> ' + req.method + ' ' + req.originalUrl); }
+    if      (req.method === 'GET')    { console.log('mock>    ' + chalk.green(req.method) + ' ' + isAuthenticatedRequest(req) + ' ' + req.originalUrl); }
+    else if (req.method === 'POST')   { console.log('mock>   ' + chalk.blue(req.method)   + ' ' + isAuthenticatedRequest(req) + ' ' + req.originalUrl); }
+    else if (req.method === 'PATCH')  { console.log('mock>  ' + chalk.magenta(req.method) + ' ' + isAuthenticatedRequest(req) + ' ' + req.originalUrl); }
+    else if (req.method === 'DELETE') { console.log('mock> ' + chalk.grey(req.method)     + ' ' + isAuthenticatedRequest(req) + ' ' + req.originalUrl); }
+    else                              { console.log('mock> ' + req.method                 + ' ' + isAuthenticatedRequest(req) + ' ' + req.originalUrl); }
   }
 
   next();
 }
 function authentication(req, res, next) {
-  var pattern = new RegExp(/[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}/);
-  if (req.method !== 'OPTIONS' && pattern.test(req.headers.authorization) !== true) {
+  if (req.method !== 'OPTIONS' && requestHasValidToken(req) !== true) {
     res.status(401).send({
       status: 401,
       message: "Invalid token"
@@ -56,6 +73,6 @@ app.use('/projects', projects);
 app.use('/translations', translations);
 
 // application
-app.listen(3002, function() {
+app.listen(3003, function() {
   console.log('Mock server started on port 3002');
 });
