@@ -86,8 +86,25 @@ router.get('/', function(req, res) {
 });
 
 // GET /projects/:owner/:repo
-// router.get('/:owner/:repo', function(req, res) {
-//
-// });
+router.get('/:owner/:repo', function(req, res) {
+  var owner = req.params.owner;
+  var repo = req.params.repo;
+
+  var group = projects.filter(function(group) {
+    return group.user.pseudo === owner;
+  });
+
+  if (group.length === 0) { res.status(404).json({message: 'Unknown user ' + owner}); }
+  else if (group.length > 1) { res.status(409).json({message: 'Several user ' + owner + ' found'}); }
+  else {
+    var project = group[0].projects.filter(function(project) {
+      return project.name === repo;
+    });
+
+    if (project.length === 0) { res.status(404).json({message: 'Unknown repo ' + repo}); }
+    else if (project.length > 1) { res.status(409).json({message: 'Several repo ' + repo + ' found'}); }
+    else { res.status(200).json(project[0]); }
+  }
+});
 
 module.exports = router;
