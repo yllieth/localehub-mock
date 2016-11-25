@@ -1,7 +1,8 @@
-var express    = require('express');
-var bodyParser = require('body-parser');
-var chalk      = require('chalk');
-var projects   = require('./src/projects');
+var express      = require('express');
+var bodyParser   = require('body-parser');
+var chalk        = require('chalk');
+var projects     = require('./src/projects');
+var translations = require('./src/translations');
 var app = express();
 
 function setupCors(req, res, next) {
@@ -52,6 +53,7 @@ app.use(authentication);
 
 // resources
 app.use('/projects', projects);
+app.use('/translations', translations);
 
 // application
 app.listen(3002, function() {
