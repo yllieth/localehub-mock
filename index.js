@@ -73,6 +73,6 @@ app.use('/projects', projects);
 app.use('/translations', translations);
 
 // application
-app.listen(3003, function() {
+app.listen(3002, function() {
   console.log('Mock server started on port 3002');
 });
