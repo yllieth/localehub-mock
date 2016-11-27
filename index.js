@@ -1,6 +1,7 @@
 var express      = require('express');
 var bodyParser   = require('body-parser');
 var chalk        = require('chalk');
+var login        = require('./src/login');
 var projects     = require('./src/projects');
 var translations = require('./src/translations');
 var app = express();
@@ -18,6 +19,10 @@ function isAuthenticatedRequest(request) {
   return requestHasValidToken(request)
     ? chalk.green.bold('✓')
     : chalk.red.bold('✘');
+}
+function notSecuredRequest(request) {
+  var notSecuredUrls = ['/login'];
+  return notSecuredUrls.indexOf(request.originalUrl) >= 0;
 }
 
 // middlewares
@@ -52,13 +57,13 @@ function formatConsoleoutput(req, res, next) {
   next();
 }
 function authentication(req, res, next) {
-  if (req.method !== 'OPTIONS' && requestHasValidToken(req) !== true) {
+  if (req.method === 'OPTIONS' || notSecuredRequest(req) === true || requestHasValidToken(req) === true) {
+    next();
+  } else {
     res.status(401).send({
       status: 401,
       message: "Invalid token"
-    })
-  } else {
-    next();
+    });
   }
 }
 
@@ -69,6 +74,7 @@ app.use(formatConsoleoutput);
 app.use(authentication);
 
 // resources
+app.use('/login', login);
 app.use('/projects', projects);
 app.use('/translations', translations);
 
