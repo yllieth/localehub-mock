@@ -3,80 +3,40 @@ var router = express.Router();
 
 var projects = [
   {
-    user: {
-      avatarUrl: "https://avatars3.githubusercontent.com/u/1174557?v=3&s=466",
-      profileUrl: "https://github.com/yllieth",
-      pseudo: "yllieth",
-      fullname: "Sylvain RAGOT",
-      isOrganization: false
-    },
-    projects: [
-      {
-        owner: "yllieth",
-        name: "github-dashboard",
-        url: "",
-        lastActiveBranch: "master",
-        availableBranches: ["master", "tp-branch1", "pu-20161002"]
-      }, {
-        owner: "yllieth",
-        name: "other project with a very long name",
-        url: "",
-        lastActiveBranch: "master",
-        availableBranches: ["master", "tp-branch1", "pu-20161002"]
-      }, {
-        owner: "yllieth",
-        name: "project 3",
-        url: "",
-        lastActiveBranch: "master",
-        availableBranches: ["master", "tp-branch1", "pu-20161002"]
-      }, {
-        owner: "yllieth",
-        name: "project4",
-        url: "",
-        lastActiveBranch: "master",
-        availableBranches: ["master", "tp-branch1", "pu-20161002"]
-      }, {
-        owner: "yllieth",
-        name: "project 5",
-        url: "",
-        lastActiveBranch: "master",
-        availableBranches: ["master", "tp-branch1", "pu-20161002"]
-      }
-    ],
-    expanded: true
-  },
-  {
-    user: {
-      avatarUrl: "https://avatars3.githubusercontent.com/u/6170002?v=3&s=200",
-      profileUrl: "https://github.com/predicsis",
-      fullname: "PredicSis",
-      pseudo: null,
-      isOrganization: true
-    },
-    projects: [],
-    expanded: false
-  },
-  {
-    user: {
-      avatarUrl: "https://avatars2.githubusercontent.com/u/13524192?v=3&s=200",
-      profileUrl: "https://github.com/coocoonhome",
-      fullname: "Coocoonhome",
-      pseudo: null,
-      isOrganization: true
-    },
-    projects: [],
-    expanded: false
-  },
-  {
-    user: {
-      avatarUrl: null,
-      profileUrl: "https://github.com/localehub",
-      fullname: "LocaleHub",
-      pseudo: null,
-      isOrganization: true
-    },
-    projects: [],
-    expanded: false
+    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
+    "name": "project 3",
+    "lastActiveBranch": "master",
+    "user": "https://api.github.com/users/yllieth",
+    "owner": "https://api.github.com/users/yllieth",
+    "id": "57a889ab510b2ce22daeee41fb8d0872"
+  }, {
+    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
+    "name": "project 5",
+    "lastActiveBranch": "master",
+    "user": "https://api.github.com/users/yllieth",
+    "owner": "https://api.github.com/orgs/Predicsis",
+    "id": "d3e2ed9abd94a182460f18afc54119ed"
+  }, {
+    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
+    "name": "project 4",
+    "lastActiveBranch": "master",
+    "user": "https://api.github.com/users/yllieth",
+    "owner": "https://api.github.com/users/yllieth",
+    "id": "8c1679bf94315ee1c76042090bc4a56c"
+  }, {
+    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
+    "name": "other project with a very long name",
+    "lastActiveBranch": "master",
+    "user": "https://api.github.com/users/yllieth",
+    "owner": "https://api.github.com/users/yllieth",
+    "id": "6d048f104b391670baab330204c2b350"
+  }, {
+    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
+    "name": "github-dashboard",
+    "lastActiveBranch": "master",
+    "user": "https://api.github.com/users/yllieth",
+    "owner": "https://api.github.com/users/yllieth",
+    "id": "d41d8cd98f00b204e9800998ecf8427e"
   }
 ];
 

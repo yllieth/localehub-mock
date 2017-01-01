@@ -3,8 +3,10 @@ var bodyParser   = require('body-parser');
 var chalk        = require('chalk');
 var login        = require('./src/login');
 var projects     = require('./src/projects');
+var organizations= require('./src/organizations');
 var translations = require('./src/translations');
 var app = express();
+var port = 3002;
 
 function requestHasValidToken(request) {
   var pattern = new RegExp(/[a-f0-9]{8}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{4}\-[a-f0-9]{12}/);
@@ -76,9 +78,10 @@ app.use(authentication);
 // resources
 app.use('/login', login);
 app.use('/projects', projects);
+app.use('/organizations', organizations);
 app.use('/translations', translations);
 
 // application
-app.listen(3002, function() {
-  console.log('Mock server started on port 3002');
+app.listen(port, function() {
+  console.log('Mock server started on port ' + port);
 });
