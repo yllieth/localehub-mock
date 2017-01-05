@@ -61,7 +61,7 @@ var translations_fr = {
   "BRAND_NAME": "LocaleHub",
   "MISSING_FROM_EN": "lorem ipsum français"
 };
-var translations_jp = {};
+var translations_ja = {};
 
 // GET /translations/:owner/:repo
 router.get('/:owner/:repo', function(req, res) {
@@ -71,7 +71,7 @@ router.get('/:owner/:repo', function(req, res) {
   res.status(200).json({
     'fr': translations_fr,
     'en-US': translations_en,
-    'jp': translations_jp
+    'ja': translations_ja
   });
 });
 
