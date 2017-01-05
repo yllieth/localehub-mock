@@ -1,6 +1,6 @@
 {
   "name": "localehub-mock",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Mock server for localehub project",
   "main": "index.js",
   "scripts": {
