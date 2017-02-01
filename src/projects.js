@@ -3,40 +3,42 @@ var router = express.Router();
 
 var projects = [
   {
-    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
-    "name": "project 3",
-    "lastActiveBranch": "master",
-    "user": "https://api.github.com/users/yllieth",
-    "owner": "https://api.github.com/users/yllieth",
-    "id": "57a889ab510b2ce22daeee41fb8d0872"
-  }, {
-    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
-    "name": "project 5",
-    "lastActiveBranch": "master",
-    "user": "https://api.github.com/users/yllieth",
-    "owner": "https://api.github.com/orgs/Predicsis",
-    "id": "d3e2ed9abd94a182460f18afc54119ed"
-  }, {
-    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
-    "name": "project 4",
-    "lastActiveBranch": "master",
-    "user": "https://api.github.com/users/yllieth",
-    "owner": "https://api.github.com/users/yllieth",
-    "id": "8c1679bf94315ee1c76042090bc4a56c"
-  }, {
-    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
-    "name": "other project with a very long name",
-    "lastActiveBranch": "master",
-    "user": "https://api.github.com/users/yllieth",
-    "owner": "https://api.github.com/users/yllieth",
-    "id": "6d048f104b391670baab330204c2b350"
-  }, {
-    "availableBranches": ["tp-branch1", "master", "pu-20161002"],
-    "name": "github-dashboard",
-    "lastActiveBranch": "master",
-    "user": "https://api.github.com/users/yllieth",
-    "owner": "https://api.github.com/users/yllieth",
-    "id": "d41d8cd98f00b204e9800998ecf8427e"
+    id: "2f45df8b-1b25-43cc-9afc-4b2a2b59afc8",
+    name: "localehub-test",
+    lastActiveBranch: "gh-test",
+    availableBranches: ["master", "gh-test"],
+    i18nFiles: [
+      { repo: "yllieth/localehub-test", path: "locales/en-US.json", languageCode: "en-US", format: "json", count: 29, branch: "gh-test" },
+      { repo: "yllieth/localehub-test", path: "locales/pl.json",    languageCode: "pl",    format: "json", count: 26, branch: "gh-test" },
+      { repo: "yllieth/localehub-test", path: "locales/zh-TW.json", languageCode: "zh-TW", format: "json", count: 26, branch: "gh-test" }
+    ],
+    repository: {
+      id: 80665960,
+      name: "localehub-test",
+      fullName: "yllieth/localehub-test",
+      description: "Test repository for localehub application",
+      fork: false,
+      private: false,
+      owner: {
+        id: 1174557,
+        login: "yllieth",
+        url: "https://github.com/yllieth",
+        avatar_url: "https://avatars.githubusercontent.com/u/1174557?v=3",
+        events_url: "https://api.github.com/users/yllieth/events{/privacy}",
+        repos_url: "https://api.github.com/users/yllieth/repos",
+        is_organization: false
+      }
+    },
+    createdBy: {
+      id: 1174557,
+      login: "yllieth",
+      description: "Frontend developer, passionated about web design, AngularJS lover. Having a beautiful life is easy: a motivating project, a whiteboard, and a laptop",
+      url: "https://github.com/yllieth",
+      avatar_url: "https://avatars.githubusercontent.com/u/1174557?v=3",
+      events_url: "https://api.github.com/users/yllieth/events{/privacy}",
+      repos_url: "https://api.github.com/users/yllieth/repos",
+      is_organization: false
+    }
   }
 ];
 
