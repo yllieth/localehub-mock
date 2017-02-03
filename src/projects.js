@@ -47,18 +47,12 @@ router.get('/', function(req, res) {
   res.status(200).json(projects)
 });
 
-// GET /projects/:owner/:repo
-router.get('/:owner/:repo', function(req, res) {
-  var owner = req.params.owner;
-  var repo = req.params.repo;
+// GET /projects/:id
+router.get('/:projectId', function(req, res) {
+  var project = projects[0];
+  project.id = req.params.projectId;
 
-  var candidates = projects.filter(function(project) {
-    return project.user.indexOf(owner) >= 0 && project.name === repo;
-  });
-
-  if (candidates.length === 0) { res.status(404).json({message: 'Unknown project ' + owner + '/' + repo}); }
-  else if (candidates.length > 1) { res.status(409).json({message: 'Several projects ' + owner + '/' + repo + ' found'}); }
-  else { res.status(200).json(candidates[0]); }
+  res.status(200).json(project);
 });
 
 module.exports = router;

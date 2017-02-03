@@ -3,6 +3,7 @@ var bodyParser   = require('body-parser');
 var chalk        = require('chalk');
 var login        = require('./src/login');
 var projects     = require('./src/projects');
+var currentUser  = require('./src/current-user');
 var organizations= require('./src/organizations');
 var translations = require('./src/translations');
 var app = express();
@@ -77,6 +78,7 @@ app.use(authentication);
 
 // resources
 app.use('/login', login);
+app.use('/current-user', currentUser);
 app.use('/projects', projects);
 app.use('/organizations', organizations);
 app.use('/translations', translations);
