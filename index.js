@@ -5,7 +5,6 @@ var login        = require('./src/login');
 var projects     = require('./src/projects');
 var currentUser  = require('./src/current-user');
 var organizations= require('./src/organizations');
-var translations = require('./src/translations');
 var app = express();
 var port = 3002;
 
@@ -81,7 +80,6 @@ app.use('/login', login);
 app.use('/current-user', currentUser);
 app.use('/projects', projects);
 app.use('/organizations', organizations);
-app.use('/translations', translations);
 
 // application
 app.listen(port, function() {
